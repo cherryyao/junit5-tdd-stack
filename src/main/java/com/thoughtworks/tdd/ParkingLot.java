@@ -5,8 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+
+    int size;
     private Map<Receipt,Car> carReceipt = new HashMap<>();
+
+
     public ParkingLot(int size) {
+        this.size = size;
     }
 
     public Receipt park(Car theCar) {
@@ -16,6 +21,14 @@ public class ParkingLot {
     }
 
     public Car unPack(Receipt receipt) {
-        return carReceipt.get(receipt);
+        this.size--;
+        return carReceipt.remove(receipt);
+
     }
+
+    public boolean isFull() {
+        return this.size == 0;
+    }
+
+
 }
