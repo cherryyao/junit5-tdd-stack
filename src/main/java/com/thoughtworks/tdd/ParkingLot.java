@@ -21,11 +21,8 @@ public class ParkingLot {
     }
 
     public Car unPack(Receipt receipt) {
-        //this.size++;
         Car car = carReceipt.get(receipt);
         carReceipt.remove(receipt);
-//        System.out.print("&&"+carReceipt.get(receipt));
-//        System.out.print("&&"+carReceipt.remove(receipt));
         return car;
 
     }

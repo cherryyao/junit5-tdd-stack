@@ -11,20 +11,29 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ParkingBoyTest {
     @Test
     public void should_park_successfully_given_parking_lot_is_not_full(){
-        ParkingLot parkingLot1 = new ParkingLot(1);
+//        ParkingLot parkingLot1 = new ParkingLot(1);
+//        List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
+//        ParkingLotList.add(parkingLot1);
+//        ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
+//        try {
+//            parkingBoy.parking(new Car());
+//        }catch (ParkingLotException exception){
+//            fail("should park successfully");
+//        }
+        ParkingLot mockParkingLot1 = mock(ParkingLot.class);
         List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
-        ParkingLotList.add(parkingLot1);
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLotList.add(mockParkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
-        try {
-            parkingBoy.parking(new Car());
-        }catch (ParkingLotException exception){
-            fail("should park successfully");
-        }
+        Car theCar = new Car();
+        parkingBoy.parking(theCar);
+        verify(mockParkingLot1).park(theCar);
     }
 
     @Test
@@ -77,7 +86,7 @@ public class ParkingBoyTest {
         Car theCar = new Car();
         Receipt receipt1 = parkingBoy.parking(theCar);
         System.out.print(receipt1);
-        assertThat(parkingBoy.pickCar(receipt1),is(parkingLot1.unPack(receipt1)));
+        assertThat(theCar,is(parkingLot1.unPack(receipt1)));
     }
 
     @Test
