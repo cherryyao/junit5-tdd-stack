@@ -60,17 +60,35 @@ public class ParkingBoyTest {
 
     @Test
     public void should_park_successfully_given_two_parking_lots(){
-        ParkingLot parkingLot1 = new ParkingLot(1);
-        ParkingLot parkingLot2 = new ParkingLot(1);
+//        ParkingLot parkingLot1 = new ParkingLot(1);
+//        ParkingLot parkingLot2 = new ParkingLot(1);
+//        List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
+//        ParkingLotList.add(parkingLot1);
+//        ParkingLotList.add(parkingLot2);
+//        ParkingBoy parkingBoy =new ParkingBoy(ParkingLotList);
+//        try {
+//            parkingBoy.parking(new Car());
+//        }catch (ParkingLotException exception){
+//            fail("should park successfully");
+//        }
+        ParkingLot mockParkingLot1 = mock(ParkingLot.class);
+        ParkingLot mockParkingLot2 = mock(ParkingLot.class);
+
         List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
-        ParkingLotList.add(parkingLot1);
-        ParkingLotList.add(parkingLot2);
-        ParkingBoy parkingBoy =new ParkingBoy(ParkingLotList);
-        try {
-            parkingBoy.parking(new Car());
-        }catch (ParkingLotException exception){
-            fail("should park successfully");
-        }
+        ParkingLotList.add(mockParkingLot1);
+        ParkingLotList.add(mockParkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
+
+        Car theCar = new Car();
+        Car anotherCar = new Car();
+
+        parkingBoy.parking(theCar);
+        when(mockParkingLot1.isFull()).thenReturn(true);
+        parkingBoy.parking(anotherCar);
+
+        verify(mockParkingLot1).park(theCar);
+        verify(mockParkingLot2).park(anotherCar);
     }
     @Test
     public void should_get_specific_car_when_given_two_parking_lots(){
