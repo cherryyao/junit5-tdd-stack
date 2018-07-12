@@ -38,14 +38,23 @@ public class ParkingBoyTest {
 
     @Test
     public void should_get_specific_car_when_call_Pick_given_receipt_is_right(){
-        ParkingLot parkingLot1 = new ParkingLot(1);
+//        ParkingLot parkingLot1 = new ParkingLot(1);
+//        List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
+//        ParkingLotList.add(parkingLot1);
+//        ParkingLot parkingLot = new ParkingLot(1);
+//        ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
+//        Car theCar = new Car();
+//        Receipt receipt = parkingBoy.parking(theCar);
+//         assertThat(parkingBoy.pickCar(receipt),is(theCar));
+
+        ParkingLot mockParkingLot1 = mock(ParkingLot.class);
         List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
-        ParkingLotList.add(parkingLot1);
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLotList.add(mockParkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
         Car theCar = new Car();
         Receipt receipt = parkingBoy.parking(theCar);
-         assertThat(parkingBoy.pickCar(receipt),is(theCar));
+        parkingBoy.pickCar(receipt);
+        verify(mockParkingLot1).unPack(receipt);
 
     }
 
