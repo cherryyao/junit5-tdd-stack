@@ -166,6 +166,23 @@ public class ParkingBoyTest {
         Receipt receipt = parkingBoy.parking(theCar);
         Receipt anotherReceipt = parkingBoy.parking(new Car());
         assertThat(parkingBoy.pickCar(anotherReceipt),not(theCar));
+//        ParkingLot mockParkingLot1 = mock(ParkingLot.class);
+//        ParkingLot mockParkingLot2 = mock(ParkingLot.class);
+//
+//        List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
+//        ParkingLotList.add(mockParkingLot1);
+//        ParkingLotList.add(mockParkingLot2);
+//
+//        ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
+//
+//        Car theCar = new Car();
+//        Receipt receipt1 =parkingBoy.parking(theCar);
+//        Receipt receipt2 = parkingBoy.parking(new Car());
+//
+//        when(mockParkingLot1.unPack(receipt2)).thenReturn(new Car());
+//        verify(mockParkingLot1).park(theCar);
+
+
     }
 
 
