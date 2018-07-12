@@ -92,15 +92,33 @@ public class ParkingBoyTest {
     }
     @Test
     public void should_get_specific_car_when_given_two_parking_lots(){
-        ParkingLot parkingLot1 = new ParkingLot(1);
-        ParkingLot parkingLot2 = new ParkingLot(1);
+//        ParkingLot parkingLot1 = new ParkingLot(1);
+//        ParkingLot parkingLot2 = new ParkingLot(1);
+//        List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
+//        ParkingLotList.add(parkingLot1);
+//        ParkingLotList.add(parkingLot2);
+//        ParkingBoy parkingBoy =new ParkingBoy(ParkingLotList);
+//        Car theCar = new Car();
+//        Receipt receipt = parkingBoy.parking(theCar);
+//        assertThat(parkingBoy.pickCar(receipt),is(theCar));
+        ParkingLot mockParkingLot1 = mock(ParkingLot.class);
+        ParkingLot mockParkingLot2 = mock(ParkingLot.class);
+
         List<ParkingLot> ParkingLotList  = new ArrayList<ParkingLot >();
-        ParkingLotList.add(parkingLot1);
-        ParkingLotList.add(parkingLot2);
-        ParkingBoy parkingBoy =new ParkingBoy(ParkingLotList);
+        ParkingLotList.add(mockParkingLot1);
+        ParkingLotList.add(mockParkingLot2);
+
+        ParkingBoy parkingBoy = new ParkingBoy(ParkingLotList);
+
         Car theCar = new Car();
-        Receipt receipt = parkingBoy.parking(theCar);
-        assertThat(parkingBoy.pickCar(receipt),is(theCar));
+        Receipt receipt1 =new Receipt();
+
+        parkingBoy.parking(theCar);
+        parkingBoy.pickCar(receipt1);
+        when(mockParkingLot1.park(theCar)).thenReturn(receipt1);
+
+        verify(mockParkingLot1).unPack(receipt1);
+        //verify(mockParkingLot2).unPack(receipt2);
     }
     @Test
     public void should_park_by_order_when_given_two_parking_lots(){
