@@ -21,13 +21,17 @@ public class ParkingLot {
     }
 
     public Car unPack(Receipt receipt) {
-        this.size--;
-        return carReceipt.remove(receipt);
+        //this.size++;
+        Car car = carReceipt.get(receipt);
+        carReceipt.remove(receipt);
+//        System.out.print("&&"+carReceipt.get(receipt));
+//        System.out.print("&&"+carReceipt.remove(receipt));
+        return car;
 
     }
 
     public boolean isFull() {
-        return this.size == 0;
+        return carReceipt.size() == size;
     }
 
 
