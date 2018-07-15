@@ -1,12 +1,10 @@
-import com.thoughtworks.tdd.Car;
-import com.thoughtworks.tdd.ParkingLot;
-import com.thoughtworks.tdd.Receipt;
+package com.thoughtworks.tdd;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
-    List<ParkingLot > ParkingLotList= new ArrayList<ParkingLot >();
+    private List<ParkingLot > ParkingLotList= new ArrayList<ParkingLot >();
 
     public ParkingBoy(List<ParkingLot> parkingLotList) {
 
@@ -32,6 +30,10 @@ public class ParkingBoy {
            break;
        }
        return car;
+    }
+
+    public boolean isParking() {
+        return ParkingLotList.stream().allMatch(x->!x.isFull());
     }
 }
 
