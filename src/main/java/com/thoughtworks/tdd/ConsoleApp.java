@@ -1,6 +1,8 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.SplittableRandom;
 import java.util.UUID;
 
 public class ConsoleApp {
@@ -9,7 +11,7 @@ public class ConsoleApp {
 
     public static void main(String[] args){
         ConsoleApp consoleApp = new ConsoleApp();
-        //consoleApp.init();
+        consoleApp.initParkingLot();
         consoleApp.start();
     }
 
@@ -19,19 +21,45 @@ public class ConsoleApp {
         String action = readInput();
         if (action == "1"){
             output("请输入车牌号:");
-            String inputs = readInput();
+            String inputCarID = readInput();
             try{
-                UUID uuid = park(inputs);
+                UUID uuid = park(inputCarID);
+                output("停车成功，您的小票是：\n"+uuid);
             }catch (ParkingLotFullException e){
                 output("车已停满，请晚点再来");
             }
+        }else if (action == "2"){
+            output("请输入小票编号：");
+            String inputRecipit = readInput();
+            try{
+
+                String carID = unpark(inputRecipit);
+                output("车已取出，您的车牌号是: "+carID);
+            }catch (UnparkExcepiton e){
+                output("非法小票，无法取出车，请查证后再输");
+            }
+
+        }else {
+            output("非法指令，请查证后再输");
         }
 
 
 
     }
 
-    private UUID park(String inputs) {
+    private String unpark(String  inputRecipit) {
+        Receipt receipt = new Receipt(UUID.fromString(inputRecipit));
+        Car car = parkingBoy.pickCar(receipt);
+        return car.getId();
+    }
+
+    public void initParkingLot(){
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(3));
+        parkingBoy = new ParkingBoy(parkingLots);
+    }
+
+    public UUID park(String inputs) {
         if(parkingBoy.isParking()){
             Car car = new Car(inputs);
             Receipt receipt = parkingBoy.parking(car);

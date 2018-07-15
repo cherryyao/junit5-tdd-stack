@@ -1,19 +1,13 @@
-import com.thoughtworks.tdd.Car;
-import com.thoughtworks.tdd.ParkingLot;
-import com.thoughtworks.tdd.ParkingLotException;
-import com.thoughtworks.tdd.Receipt;
+package com.thoughtworks.tdd;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ParkingBoyTest {
     @Test
