@@ -47,7 +47,7 @@ public class ConsoleApp {
 
     }
 
-    private String unpark(String  inputRecipit) {
+    public String unpark(String  inputRecipit) {
         Receipt receipt = new Receipt(UUID.fromString(inputRecipit));
         Car car = parkingBoy.pickCar(receipt);
         return car.getId();
