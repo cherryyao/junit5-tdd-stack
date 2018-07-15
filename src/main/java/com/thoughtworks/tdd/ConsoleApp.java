@@ -17,40 +17,47 @@ public class ConsoleApp {
 
 
     public void start(){
-        output("1.停车\n"+"2.取车\n"+"请输入您要进行的操作:");
-        String action = readInput();
-        if (action == "1"){
-            output("请输入车牌号:");
-            String inputCarID = readInput();
-            try{
-                UUID uuid = park(inputCarID);
-                output("停车成功，您的小票是：\n"+uuid);
-            }catch (ParkingLotFullException e){
-                output("车已停满，请晚点再来");
-            }
-        }else if (action == "2"){
-            output("请输入小票编号：");
-            String inputRecipit = readInput();
-            try{
+        while (true) {
+            output("1.停车\n" + "2.取车\n" + "请输入您要进行的操作:\n");
+            String action = readInput();
+            if (action.equals("1")) {
+                output("请输入车牌号:");
+                String inputCarID = readInput();
+                try {
+                    UUID uuid = park(inputCarID);
+                    output("停车成功，您的小票是：\n" + uuid+"\n");
+                } catch (ParkingLotFullException e) {
+                    output("车已停满，请晚点再来");
+                }
+            } else if (action.equals("2")) {
+                output("请输入小票编号：");
+                String inputRecipit = readInput();
+                try {
 
-                String carID = unpark(inputRecipit);
-                output("车已取出，您的车牌号是: "+carID);
-            }catch (UnparkExcepiton e){
-                output("非法小票，无法取出车，请查证后再输");
+                    String carID = unpark(inputRecipit);
+                    output("车已取出，您的车牌号是: " + carID+"\n");
+                } catch (UnparkExcepiton e) {
+                    output("非法小票，无法取出车，请查证后再输\n");
+                }
+
+            } else {
+                output("非法指令，请查证后再输");
             }
 
-        }else {
-            output("非法指令，请查证后再输");
+
         }
-
-
-
     }
 
     public String unpark(String  inputRecipit) {
-        Receipt receipt = new Receipt(UUID.fromString(inputRecipit));
-        Car car = parkingBoy.pickCar(receipt);
-        return car.getId();
+        try{
+            Receipt receipt = new Receipt(UUID.fromString(inputRecipit));
+            Car car = parkingBoy.pickCar(receipt);
+            return car.getId();
+        }catch (Exception e){
+            throw new UnparkExcepiton();
+        }
+
+
     }
 
     public void initParkingLot(){

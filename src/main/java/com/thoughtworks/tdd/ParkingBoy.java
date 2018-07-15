@@ -15,7 +15,7 @@ public class ParkingBoy {
         Receipt receipt = new Receipt();
         for (int i = 0; i < ParkingLotList.size(); i++) {
             if (!ParkingLotList.get(i).isFull()) {
-                receipt = ParkingLotList.get(i).park(car);
+            receipt = ParkingLotList.get(i).park(car);
                 break;
             }
 

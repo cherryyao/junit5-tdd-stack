@@ -3,11 +3,12 @@ package com.thoughtworks.tdd;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class ParkingLot {
 
     int size;
-    private Map<Receipt,Car> carReceipt = new HashMap<>();
+    private Map<UUID,Car> carReceipt = new HashMap<>();
 
 
     public ParkingLot(int size) {
@@ -15,14 +16,22 @@ public class ParkingLot {
     }
 
     public Receipt park(Car theCar) {
-       Receipt receipt = new Receipt();
-       carReceipt.put(receipt,theCar);
-        return receipt;
+       if (isFull()) {
+           throw new ParkingLotFullException();
+       }else
+       {
+           Receipt receipt = new Receipt();
+           UUID uuid = UUID.randomUUID();
+           receipt.setUuid(uuid);
+           carReceipt.put(receipt.getUUID(),theCar);
+           return receipt;
+       }
+
     }
 
     public Car unPack(Receipt receipt) {
-        Car car = carReceipt.get(receipt);
-        carReceipt.remove(receipt);
+        Car car = carReceipt.get(receipt.getUUID());
+        carReceipt.remove(receipt.getUUID());
         return car;
 
     }
