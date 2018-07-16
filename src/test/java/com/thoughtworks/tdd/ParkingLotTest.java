@@ -25,7 +25,7 @@ public class ParkingLotTest {
         try {
             parkingLot.park(new Car());
             fail("should park successfully");
-        }catch (Error e){
+        }catch (ParkingLotFullException e){
         }
     }
 
@@ -40,7 +40,7 @@ public class ParkingLotTest {
 
     @Test
     public void should_not_get_specific_car_when_call_unPark_given_receipt_is_wrong(){
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot(2);
         Car theCar =new Car();
         Receipt receipt = parkingLot.park(theCar);
         Receipt anotherReceipt = parkingLot.park(new Car());
@@ -66,7 +66,7 @@ public class ParkingLotTest {
         try {
             parkingLot.park(new Car());
             fail("should park successfully");
-        }catch (Error e){
+        }catch (ParkingLotFullException e){
         }
 //        Receipt receipt =parkingLot.park(theCar);
 //        parkingLot.unPack(receipt);
@@ -76,7 +76,7 @@ public class ParkingLotTest {
 
     @Test
     public void should_park_successfullly_when_call_park_again_given_a_full_parking_lot_take_out_a_car(){
-        ParkingLot parkingLot = new ParkingLot(0);
+        ParkingLot parkingLot = new ParkingLot(1);
         Car theCar =new Car();
         Receipt receipt =parkingLot.park(theCar);
         parkingLot.unPack(receipt);

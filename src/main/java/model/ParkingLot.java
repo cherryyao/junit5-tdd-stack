@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd;
+package model;
 
 
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.UUID;
 public class ParkingLot {
 
     int size;
-    private Map<UUID,Car> carReceipt = new HashMap<>();
+    private Map<UUID, Car> carReceipt = new HashMap<>();
 
 
     public ParkingLot(int size) {
@@ -30,14 +30,9 @@ public class ParkingLot {
     }
 
     public Car unPack(Receipt receipt) {
-        if (carReceipt.containsKey(receipt.getUUID())){
-            Car car = carReceipt.get(receipt.getUUID());
-            carReceipt.remove(receipt.getUUID());
-            return car;
-        }else {
-            throw new UnparkExcepiton();
-        }
-
+        Car car = carReceipt.get(receipt.getUUID());
+        carReceipt.remove(receipt.getUUID());
+        return car;
 
     }
 
