@@ -1,6 +1,6 @@
+import com.thoughtworks.tdd.ParkingBoy;
+import com.thoughtworks.tdd.ParkingLot;
 import controller.ParkingboyController;
-import model.ParkingBoy;
-import model.ParkingLot;
 import view.Cli;
 import view.Request;
 import view.Response;
@@ -22,8 +22,10 @@ public class main {
         ParkingboyController controller =new ParkingboyController(parkingBoy);
         Router router = new Router("main",controller);
 
+        controller.showMainPage();
+
+
         Cli cli = new Cli();
-        router.printMainInterface();
 
         while(true){
             String readCommand = cli.read();
